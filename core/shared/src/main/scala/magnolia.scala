@@ -308,7 +308,7 @@ object Magnolia {
             val $paramsVal: $scalaPkg.Array[$magnoliaPkg.Param[$typeConstructor, $genericType]] =
               new $scalaPkg.Array(${assignments.length})
             ..$assignments
-            
+
             ${c.prefix}.combine($magnoliaPkg.Magnolia.caseClass[$typeConstructor, $genericType](
               $className,
               false,
@@ -366,9 +366,9 @@ object Magnolia {
             q"""{
             val $subtypesVal: $scalaPkg.Array[$magnoliaPkg.Subtype[$typeConstructor, $genericType]] =
               new $scalaPkg.Array(${assignments.size})
-            
+
             ..$assignments
-            
+
             ${c.prefix}.dispatch(new $magnoliaPkg.SealedTrait(
               $genericTypeName,
               $subtypesVal: $scalaPkg.Array[$magnoliaPkg.Subtype[$typeConstructor, $genericType]])
@@ -422,7 +422,7 @@ object Magnolia {
     if (currentStack.frames.isEmpty) recursionStack = ListMap()
 
     val dereferencedResult = result.map { tree =>
-      if (currentStack.frames.isEmpty) c.untypecheck(removeDeferred.transform(tree)) else tree
+      if (currentStack.frames.isEmpty) removeDeferred.transform(tree) else tree
     }
 
     dereferencedResult.getOrElse {
